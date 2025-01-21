@@ -2,7 +2,7 @@ sudo: required
 services:
   - docker
 
-before-install:
+before_install:
   - docker build -t hartharney/test-flight -f Dockerfile.dev .
 
 script:
