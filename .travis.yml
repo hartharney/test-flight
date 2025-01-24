@@ -7,3 +7,15 @@ before_install:
 
 script:
   - docker run -e CI=true hartharney/test-flight npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "test-flight"
+  env: "Test-flight-env-2"
+  bucket_name: "elasticbeanstalk-eu-north-1-089820717894"
+  bucket_path: "test-flight"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
