@@ -1,11 +1,19 @@
 sudo: required
+dist: focal
+
 services:
   - docker
 
 before_install:
+  # Ensure glibc is updated
+  - sudo apt-get update
+  - sudo apt-get install -y libc6
+
+  # Build Docker image
   - docker build -t hartharney/test-flight -f Dockerfile.dev .
 
 script:
+  # Run tests inside Docker
   - docker run -e CI=true hartharney/test-flight npm run test
 
 deploy:
